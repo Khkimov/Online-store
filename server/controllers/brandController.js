@@ -8,7 +8,8 @@ class BrandController {
   }
 
   async getAll(req, res) {
-    const brands = Brand.findAll();
+    const brands = await Brand.findAll();
+    console.log(brands);
     return res.json(brands);
   }
 }
