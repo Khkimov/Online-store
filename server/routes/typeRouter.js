@@ -1,6 +1,4 @@
-const Router = require('express');
-
-const router = new Router();
+const router = require('express').Router();
 const typeController = require('../controllers/typeController');
 const checkRole = require('../middleware/checkRoleMiddleware');
 

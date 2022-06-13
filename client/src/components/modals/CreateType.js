@@ -3,7 +3,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { createType } from "../../http/deviceAPI";
 
 const CreateType = ({show, onHide}) => {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('');
 
   const addType = () => {
     createType({name: value}).then(data => {
@@ -15,7 +15,6 @@ const CreateType = ({show, onHide}) => {
     <Modal
     show={show}
     onHide={onHide}
-      size="lg"
       centered
     >
       <Modal.Header closeButton>

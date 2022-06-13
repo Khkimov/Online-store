@@ -1,4 +1,4 @@
-const uid = require('uuid');
+const uuid = require('uuid');
 const path = require('path');
 const { Device, DeviceInfo } = require('../models/models');
 const ApiError = require('../error/ApiError');
@@ -10,9 +10,8 @@ class DeviceController {
         name, price, brandId, typeId, info,
       } = req.body;
       const { img } = req.files;
-      const fileName = `${uid.v4()}.jpg`;
+      const fileName = `${uuid.v4()}.jpg`;
       img.mv(path.resolve(__dirname, '..', 'static', fileName));
-
       const device = await Device.create({
         name, price, brandId, typeId, img: fileName,
       });
@@ -27,8 +26,8 @@ class DeviceController {
       }
 
       return res.json(device);
-    } catch (error) {
-      next(ApiError.badRequest(error.message));
+    } catch (e) {
+      next(ApiError.badRequest(e.message));
     }
   }
 
@@ -57,10 +56,12 @@ class DeviceController {
 
   async getOne(req, res) {
     const { id } = req.params;
-    const device = await Device.findOne({
-      where: { id },
-      include: [{ model: DeviceInfo, as: 'info' }],
-    });
+    const device = await Device.findOne(
+      {
+        where: { id },
+        include: [{ model: DeviceInfo, as: 'info' }],
+      },
+    );
     return res.json(device);
   }
 }
